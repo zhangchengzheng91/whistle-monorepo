@@ -1,0 +1,13 @@
+{
+  "name": "whistle-monorepo",
+  "private": true,
+  "packageManager": "pnpm@10.0.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "electron"
+    ]
+  },
+  "scripts": {
+    "install:all": "pnpm install"
+  }
+}
