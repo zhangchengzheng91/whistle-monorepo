@@ -1,7 +1,5 @@
-"use client";
-
-import HomeClient from "./home-client";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return <HomeClient />;
+  redirect("/variables/projects");
 }

@@ -107,6 +107,7 @@ Desktop.ini
 .running
 *~
 
-# Editors (JetBrains: apps/*/.idea/.gitignore handles per-app rules)
+# Editors
+.idea/
 *.swp
 *.swo
