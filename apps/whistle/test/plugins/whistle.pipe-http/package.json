@@ -1,0 +1,20 @@
+{
+  "name": "whistle.pipe-http",
+  "version": "1.0.0",
+  "whistleConfig": {
+    "pluginVars": true,
+    "hintList": [
+      {
+        "value": "123456",
+        "label": "ssssssss",
+        "help": "http://www.qq.com"
+      },
+      "sdfasfasfd"
+    ],
+    "hideShortProtocol": true,
+    "hideLongProtocol": true,
+    "hintUrl": "/",
+    "rulesUrl": "/",
+    "valuesUrl": "/"
+  }
+}
