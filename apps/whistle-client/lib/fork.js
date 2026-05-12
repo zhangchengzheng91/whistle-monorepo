@@ -16,6 +16,19 @@ const SCRIPT = path.join(__dirname, 'whistle.js');
 let initing = true;
 let hasError;
 
+/** 源码直接跑 electron（未 asar 打包）时自动打开 DevTools；正式安装包不打开。 */
+const attachAutoOpenDevTools = (win) => {
+  if (app.isPackaged || process.env.WHISTLE_CLIENT_NO_DEVTOOLS === '1') {
+    return;
+  }
+  win.webContents.once('did-finish-load', () => {
+    if (win.isDestroyed()) {
+      return;
+    }
+    win.webContents.openDevTools({ mode: 'detach' });
+  });
+};
+
 const handleWhistleError = async (err) => {
   if (willQuit() || hasError) {
     return;
@@ -80,6 +93,7 @@ const forkWhistle = (restart) => {
         dockToBottom = '&dockToBottom=true';
       }
       win.loadURL(`http://local.whistlejs.com/v2/?authorization=${authorization}${dockToBottom}&mode=client&v=${VERSION}`);
+      attachAutoOpenDevTools(win);
       createMenu();
     } else {
       reloadPage();

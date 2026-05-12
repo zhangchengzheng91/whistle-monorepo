@@ -31,8 +31,10 @@ const menuItems: MenuProps["items"] = [
 
 export default function AppShell({
   children,
+  headerRight,
 }: Readonly<{
   children: React.ReactNode;
+  headerRight?: React.ReactNode;
 }>) {
   const pathname = usePathname();
 
@@ -61,8 +63,9 @@ export default function AppShell({
         }}
       >
         Header
+        {headerRight}
       </Header>
-      <Layout>
+      <Layout style={{ flex: 1, minHeight: 0, minWidth: 0 }}>
         <Sider width={220} theme="light" style={{ borderRight: "1px solid #f0f0f0" }}>
           <Menu
             mode="inline"
@@ -74,6 +77,8 @@ export default function AppShell({
         </Sider>
         <Content
           style={{
+            flex: "1 1 auto",
+            minWidth: 0,
             margin: 24,
             padding: 24,
             minHeight: 280,

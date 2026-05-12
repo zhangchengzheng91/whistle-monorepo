@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { Geist, Geist_Mono } from "next/font/google";
 import AppShell from "./app-shell";
+import AntdAppProvider from "./antd-app-provider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -28,7 +29,26 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
         <AntdRegistry>
-          <AppShell>{children}</AppShell>
+          <AntdAppProvider>
+            <AppShell
+              headerRight={
+                <a
+                  href="/"
+                  style={{
+                    color: "#fff",
+                    marginLeft: "auto",
+                    fontSize: 14,
+                    textDecoration: "none",
+                    opacity: 0.95,
+                  }}
+                >
+                  V1
+                </a>
+              }
+            >
+              {children}
+            </AppShell>
+          </AntdAppProvider>
         </AntdRegistry>
       </body>
     </html>

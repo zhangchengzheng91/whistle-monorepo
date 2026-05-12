@@ -114,6 +114,17 @@ const EDIT_MENU = {
   ],
 };
 
+const VIEW_MENU = {
+  label: 'View',
+  submenu: [
+    {
+      label: 'Reload',
+      accelerator: 'CmdOrCtrl+R',
+      role: 'reload',
+    },
+  ],
+};
+
 setContextMenu({
   showSelectAll: true,
   showSaveImageAs: true,
@@ -129,6 +140,7 @@ Menu.setApplicationMenu(Menu.buildFromTemplate([
     submenu: [RESTART_MENU, QUIT_MENU],
   },
   EDIT_MENU,
+  VIEW_MENU,
 ]));
 
 let curTitle;
@@ -356,7 +368,7 @@ exports.create = async () => {
   const proxyMenu = {
     label: 'Set As System Proxy',
     icon: icons.uncheck,
-    accelerator: 'CmdOrCtrl+R',
+    accelerator: 'CmdOrCtrl+Alt+R',
     click: switchSystemProxy,
   };
   const startMenu = {
@@ -402,6 +414,7 @@ exports.create = async () => {
       ],
     },
     EDIT_MENU,
+    VIEW_MENU,
   ]);
   const createTrayMenus = () => ([
     {

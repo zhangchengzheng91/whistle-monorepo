@@ -16,7 +16,7 @@
     "release:linux": "electron-builder --linux -p always",
     "lint": "eslint --fix lib",
     "lintfix": "npm run lint",
-    "dev": "pnpm store prune && pnpm install && pnpm --dir ../whistle exec webpack --config ./biz/webui/htdocs/src/webpack.config && pnpm --dir ../whistle/biz/webui/htdocs-v2 build && electron ./lib"
+    "dev": "electron ./lib"
   },
   "build": {
     "electronVersion": "41.2.1",

@@ -687,7 +687,11 @@ function init(proxy) {
   setProxy(proxy);
 }
 
-app.use('/v2', express.static(v2Root, { maxAge: 600000 }));
+// With WHISTLE_WEBUI_V2_PROXY left on (default), /v2 must hit the dev server first.
+// Otherwise express.static(out/) wins and stale export artifacts hide local Next changes.
+if (!enableV2Proxy) {
+  app.use('/v2', express.static(v2Root, { maxAge: 600000 }));
+}
 app.use(proxyV2Req);
 app.get('/v2', function(req, res) {
   sendV2Index(res);

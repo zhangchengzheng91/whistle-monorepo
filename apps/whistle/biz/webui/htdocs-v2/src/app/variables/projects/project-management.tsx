@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Drawer, Form, Input, Space, Table } from "antd";
+import { Button, Card, Drawer, Form, Input, Space, Table } from "antd";
 import type { TableProps } from "antd";
 import { useCallback, useState } from "react";
 
@@ -42,7 +42,9 @@ export default function ProjectManagement() {
         setData((prev) => [
           ...prev,
           {
-            key: crypto.randomUUID(),
+            key:
+              globalThis.crypto?.randomUUID?.() ??
+              `${Date.now()}-${Math.random().toString(16).slice(2)}`,
             name: values.name.trim(),
             variableCount: 0,
           },
@@ -50,30 +52,41 @@ export default function ProjectManagement() {
         form.resetFields();
         setOpen(false);
       })
-      .catch(() => {});
+      .catch(() => { });
   }, [form]);
 
   return (
     <>
-      <div style={{ marginBottom: 16 }}>
-        <Button type="primary" onClick={() => setOpen(true)}>
-          新增项目
-        </Button>
-      </div>
-      <Table<ProjectRow>
-        rowKey="key"
-        columns={columns}
-        dataSource={data}
-        pagination={{ pageSize: 10, showSizeChanger: true, showTotal: (t) => `共 ${t} 条` }}
-        locale={{ emptyText: "暂无项目" }}
-      />
+      <Card
+        bordered={false}
+        title="项目管理"
+        id="test-set-open"
+        extra={
+          <Button type="primary" htmlType="button" onClick={() => {
+            console.log('click 998')
+            setOpen(true)
+          }}>
+            新增项目test
+          </Button>
+        }
+        styles={{ body: { padding: 0 } }}
+      >
+        <Table<ProjectRow>
+          rowKey="key"
+          columns={columns}
+          dataSource={data}
+          pagination={{ pageSize: 10, showSizeChanger: true, showTotal: (t) => `共 ${t} 条` }}
+          locale={{ emptyText: "暂无项目" }}
+        />
+      </Card>
       <Drawer
         title="新增项目"
         placement="right"
         size="50%"
         open={open}
         onClose={handleClose}
-        destroyOnClose
+        destroyOnHidden
+        zIndex={1200}
         footer={
           <Space style={{ display: "flex", justifyContent: "flex-end" }}>
             <Button onClick={handleClose}>取消</Button>

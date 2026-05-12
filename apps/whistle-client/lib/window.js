@@ -73,6 +73,22 @@ const createWindow = () => {
     return ctx.execJsSafe(`window.__findWhistleCodeMirrorEditor_("${keyword}", ${prev});`);
   };
   ctx.setWin(win);
+  win.webContents.on('before-input-event', (event, input) => {
+    if (input.type !== 'keyDown' || input.isAutoRepeat) {
+      return;
+    }
+    if (String(input.key).toLowerCase() !== 'r') {
+      return;
+    }
+    const primary = process.platform === 'darwin' ? input.meta : input.control;
+    if (!primary || input.shift || input.alt) {
+      return;
+    }
+    event.preventDefault();
+    if (!win.webContents.isDestroyed()) {
+      win.webContents.reload();
+    }
+  });
   win.setMenu(null);
   const bounds = storage.getProperty(WINDOW_BOUNDS_KEY);
   if (bounds && bounds.width > 0 && bounds.height > 0) {
