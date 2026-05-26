@@ -10,10 +10,10 @@ cd apps/whistle/biz/webui/htdocs-v2
 pnpm run dev
 
 # 启动 whistle server
-cd cd apps/whistle
+cd apps/whistle
 pnpm run start
 
 # 启动 electron 客户端
-cd cd apps/whistle-client 
+cd apps/whistle-client 
 pnpm run dev
 ```

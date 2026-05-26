@@ -1,8 +1,6 @@
-"use client";
-
-import { Table, Tag } from "antd";
-import type { TableProps } from "antd";
-import { useEffect, useState } from "react";
+import { Table, Tag } from 'antd';
+import type { TableProps } from 'antd';
+import { useEffect, useState } from 'react';
 
 export type ValueRow = {
   index: number;
@@ -17,9 +15,9 @@ export default function VariablesTable() {
 
   useEffect(() => {
     let cancelled = false;
-    (async () => {
+    void (async () => {
       try {
-        const res = await fetch("/cgi-bin/values/list", { cache: "no-store" });
+        const res = await fetch('/cgi-bin/values/list', { cache: 'no-store' });
         if (!res.ok) throw new Error(String(res.status));
         const json = (await res.json()) as { ec?: number; list?: ValueRow[] };
         if (cancelled) return;
@@ -39,24 +37,24 @@ export default function VariablesTable() {
     };
   }, []);
 
-  const columns: TableProps<ValueRow>["columns"] = [
+  const columns: TableProps<ValueRow>['columns'] = [
     {
-      title: "名称",
-      dataIndex: "name",
-      key: "name",
+      title: '名称',
+      dataIndex: 'name',
+      key: 'name',
       width: 220,
       ellipsis: true,
     },
     {
-      title: "内容",
-      dataIndex: "data",
-      key: "data",
+      title: '内容',
+      dataIndex: 'data',
+      key: 'data',
       ellipsis: true,
     },
     {
-      title: "选中",
-      dataIndex: "selected",
-      key: "selected",
+      title: '选中',
+      dataIndex: 'selected',
+      key: 'selected',
       width: 88,
       render: (v: boolean | undefined) =>
         v ? <Tag color="success">是</Tag> : <Tag>否</Tag>,

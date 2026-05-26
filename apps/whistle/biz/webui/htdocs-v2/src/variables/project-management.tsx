@@ -1,8 +1,6 @@
-"use client";
-
-import { Button, Card, Drawer, Form, Input, Space, Table } from "antd";
-import type { TableProps } from "antd";
-import { useCallback, useState } from "react";
+import { Button, Card, Drawer, Form, Input, Space, Table } from 'antd';
+import type { TableProps } from 'antd';
+import { useCallback, useState } from 'react';
 
 type ProjectRow = {
   key: string;
@@ -15,17 +13,17 @@ export default function ProjectManagement() {
   const [form] = Form.useForm();
   const [data, setData] = useState<ProjectRow[]>([]);
 
-  const columns: TableProps<ProjectRow>["columns"] = [
+  const columns: TableProps<ProjectRow>['columns'] = [
     {
-      title: "项目名称",
-      dataIndex: "name",
-      key: "name",
+      title: '项目名称',
+      dataIndex: 'name',
+      key: 'name',
       ellipsis: true,
     },
     {
-      title: "变量数量",
-      dataIndex: "variableCount",
-      key: "variableCount",
+      title: '变量数量',
+      dataIndex: 'variableCount',
+      key: 'variableCount',
       width: 120,
     },
   ];
@@ -52,7 +50,7 @@ export default function ProjectManagement() {
         form.resetFields();
         setOpen(false);
       })
-      .catch(() => { });
+      .catch(() => {});
   }, [form]);
 
   return (
@@ -62,10 +60,14 @@ export default function ProjectManagement() {
         title="项目管理"
         id="test-set-open"
         extra={
-          <Button type="primary" htmlType="button" onClick={() => {
-            console.log('click 998')
-            setOpen(true)
-          }}>
+          <Button
+            type="primary"
+            htmlType="button"
+            onClick={() => {
+              console.log('click 998');
+              setOpen(true);
+            }}
+          >
             新增项目test
           </Button>
         }
@@ -75,8 +77,12 @@ export default function ProjectManagement() {
           rowKey="key"
           columns={columns}
           dataSource={data}
-          pagination={{ pageSize: 10, showSizeChanger: true, showTotal: (t) => `共 ${t} 条` }}
-          locale={{ emptyText: "暂无项目" }}
+          pagination={{
+            pageSize: 10,
+            showSizeChanger: true,
+            showTotal: (t) => `共 ${t} 条`,
+          }}
+          locale={{ emptyText: '暂无项目' }}
         />
       </Card>
       <Drawer
@@ -88,7 +94,7 @@ export default function ProjectManagement() {
         destroyOnHidden
         zIndex={1200}
         footer={
-          <Space style={{ display: "flex", justifyContent: "flex-end" }}>
+          <Space style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Button onClick={handleClose}>取消</Button>
             <Button type="primary" onClick={handleSubmit}>
               确定
@@ -100,7 +106,7 @@ export default function ProjectManagement() {
           <Form.Item
             label="项目名称"
             name="name"
-            rules={[{ required: true, message: "请输入项目名称" }]}
+            rules={[{ required: true, message: '请输入项目名称' }]}
           >
             <Input placeholder="请输入项目名称" maxLength={200} showCount />
           </Form.Item>

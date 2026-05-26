@@ -1,8 +1,6 @@
-"use client";
-
-import { Button, Form, Input, Modal, Space, message } from "antd";
-import { useState } from "react";
-import RulesTable from "./rules-table";
+import { Button, Form, Input, Modal, Space, message } from 'antd';
+import { useState } from 'react';
+import RulesTable from './rules-table';
 
 export default function RulesListPage() {
   const [open, setOpen] = useState(false);
@@ -17,19 +15,19 @@ export default function RulesListPage() {
       const v = await form.validateFields();
       const name = String(v.name).trim();
       if (!name) {
-        message.error("请输入规则名称");
+        message.error('请输入规则名称');
         return;
       }
-      if (name === "Default") {
-        message.error("不能使用名称 Default");
+      if (name === 'Default') {
+        message.error('不能使用名称 Default');
         return;
       }
-      const listRes = await fetch("/cgi-bin/rules/list", {
-        cache: "no-store",
-        credentials: "include",
+      const listRes = await fetch('/cgi-bin/rules/list', {
+        cache: 'no-store',
+        credentials: 'include',
       });
       if (!listRes.ok) {
-        message.error("无法校验规则列表");
+        message.error('无法校验规则列表');
         return;
       }
       const listJson = (await listRes.json()) as { list?: { name: string }[] };
@@ -41,37 +39,37 @@ export default function RulesListPage() {
         return;
       }
       setConfirmLoading(true);
-      const res = await fetch("/cgi-bin/rules/add", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+      const res = await fetch('/cgi-bin/rules/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({
           name,
-          value: String(v.content ?? ""),
-          clientId: "",
+          value: String(v.content ?? ''),
+          clientId: '',
         }),
       });
       const json = (await res.json()) as { ec?: number };
       if (!res.ok || json.ec !== 0) {
-        message.error("创建失败");
+        message.error('创建失败');
         return;
       }
-      message.success("已创建");
+      message.success('已创建');
       setOpen(false);
       form.resetFields();
       bumpReload();
     } catch (e) {
-      if (e && typeof e === "object" && "errorFields" in e) {
+      if (e && typeof e === 'object' && 'errorFields' in e) {
         return;
       }
-      message.error("创建失败");
+      message.error('创建失败');
     } finally {
       setConfirmLoading(false);
     }
   };
 
   return (
-    <Space orientation="vertical" size="middle" style={{ width: "100%" }}>
+    <Space orientation="vertical" size="middle" style={{ width: '100%' }}>
       <div>
         <Button type="primary" onClick={() => setOpen(true)}>
           新建规则
@@ -93,7 +91,7 @@ export default function RulesListPage() {
           <Form.Item
             name="name"
             label="名称"
-            rules={[{ required: true, message: "请输入规则名称" }]}
+            rules={[{ required: true, message: '请输入规则名称' }]}
           >
             <Input placeholder="例如 my-rule" autoComplete="off" />
           </Form.Item>

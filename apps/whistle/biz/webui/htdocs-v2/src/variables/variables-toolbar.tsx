@@ -1,7 +1,5 @@
-"use client";
-
-import { Button, Drawer } from "antd";
-import { useState } from "react";
+import { Button, Drawer } from 'antd';
+import { useState } from 'react';
 
 export default function VariablesToolbar() {
   const [open, setOpen] = useState(false);
