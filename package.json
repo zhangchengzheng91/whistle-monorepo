@@ -12,6 +12,10 @@
     }
   },
   "scripts": {
-    "install:all": "pnpm install"
+    "install:all": "pnpm install",
+    "dev": "concurrently -k -n old-ui,new-ui,server,electron \"pnpm -C apps/whistle dev\" \"pnpm -C apps/whistle/biz/webui/htdocs-v2 dev\" \"pnpm -C apps/whistle start\" \"pnpm -C apps/whistle-client dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }

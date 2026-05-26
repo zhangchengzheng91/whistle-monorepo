@@ -587,7 +587,7 @@ var jsPrepend = uiExt.jsPrepend;
 var jsAppend = uiExt.jsAppend;
 var v2Port = parseInt(process.env.WHISTLE_WEBUI_V2_PORT, 10) || 3000;
 var enableV2Proxy = process.env.WHISTLE_WEBUI_V2_PROXY !== '0';
-var v2Root = path.join(__dirname, '../htdocs-v2/out');
+var v2Root = path.join(__dirname, '../htdocs-v2/dist');
 var v2LegacyRoot = path.join(__dirname, '../htdocs-v2');
 var v2IndexFile = path.join(v2Root, 'index.html');
 var v2LegacyIndexFile = path.join(v2LegacyRoot, 'index.html');
@@ -688,7 +688,7 @@ function init(proxy) {
 }
 
 // With WHISTLE_WEBUI_V2_PROXY left on (default), /v2 must hit the dev server first.
-// Otherwise express.static(out/) wins and stale export artifacts hide local Next changes.
+// Otherwise express.static(dist/) wins and stale build artifacts hide local webpack changes.
 if (!enableV2Proxy) {
   app.use('/v2', express.static(v2Root, { maxAge: 600000 }));
 }

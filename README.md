@@ -5,7 +5,7 @@
 cd apps/whistle
 pnpm run dev
 
-# 启动新版（nextjs）UI：apps/whistle/biz/webui/htdocs-v2
+# 启动新版 UI：apps/whistle/biz/webui/htdocs-v2
 cd apps/whistle/biz/webui/htdocs-v2
 pnpm run dev
 
